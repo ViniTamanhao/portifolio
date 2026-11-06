@@ -23,29 +23,6 @@ pnpm preview   # Serve the production build locally
 
 Content lives in `src/App.tsx`, styles in `src/styles.css`, and metadata in `index.html`. The ASCII sculpture after Elsewhere has a keyboard-accessible pause control. It pauses offscreen and in hidden tabs, and shows a still frame when reduced motion is preferred.
 
-## Static deployment with Caddy
-
-Run `pnpm install --frozen-lockfile && pnpm build`, then copy **the contents of `dist/`** to `/var/www/portfolio` on the VPS. Only those static files are needed on the server; Node.js and pnpm are build tools.
-
-Example Caddyfile (replace the domain with your own):
-
-```caddyfile
-example.com {
-    root * /var/www/portfolio
-    encode zstd gzip
-    file_server
-
-    @assets path /assets/*
-    header @assets Cache-Control "public, max-age=31536000, immutable"
-    header /index.html Cache-Control "no-cache"
-    header / Cache-Control "no-cache"
-}
-```
-
-Point the domain to the VPS, allow ports 80 and 443, ensure Caddy can read the directory, and reload Caddy. Caddy manages HTTPS. This is a single page with no client-side routes, so no SPA fallback is needed. HTML should be revalidated on deployment; Vite’s hashed assets can be cached long term.
-
-The design takes inspiration from [Paco Coursey’s personal site](https://paco.me/): readable measure, quiet links, and typography-led sections. The warm palette, margin labels, and ASCII resident give this page its own character.
-
 ## ASCII sculpture
 
 The platypus is a real 3D surface rendered offline into 144 monochrome text frames, played at 12 fps (a 12-second loop). No canvas, WebGL, video, fonts, or rendering libraries are loaded by the page.
