@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#191918" />
+    <script>
+      // Apply a saved choice before the first paint; dark is the default.
+      try {
+        if (localStorage.getItem('portfolio-theme') === 'light') {
+          document.documentElement.dataset.theme = 'light';
+          document.querySelector('meta[name="theme-color"]').content = '#f8f7f3';
+        }
+      } catch {}
+    </script>
+    <meta name="description" content="Vinícius Silva is a software engineer in São José dos Campos, Brazil. Building backend systems, interfaces, and practical developer tools with Go and TypeScript." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Vinícius Silva — Software Engineer" />
+    <meta property="og:description" content="Backend systems, thoughtful interfaces, and tools that make software easier to understand. A personal corner of the web." />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Vinícius Silva — Software Engineer</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
